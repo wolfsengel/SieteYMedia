@@ -58,11 +58,14 @@ public class InterfaceConsola {
             System.out.println("Gana la banca");
         }
     }
-    public static void main(String[] args) {
+    public static void GameControler(){
         new SieteyMedia();
         presentarJuego();
         turnoJugador();
         turnoBanca();
         System.out.println("Adios");
+    }
+    public static void main(String[] args) {
+        GameControler();
     }
 }

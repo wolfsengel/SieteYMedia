@@ -2,7 +2,12 @@
 package sieteymedia;
 import recursos.Baraja;
 import recursos.Carta;
+
+import java.util.Scanner;
+
 public class SieteyMedia {
+    static String auxiliar;
+    static String auxiliar2;
     static Baraja baraja;
     static Carta[] cartasJugador;
     static Carta[] cartasBanca;
@@ -30,11 +35,28 @@ public class SieteyMedia {
         }
         cartas[i] = c;
     }
-    public static void mostrarCartas(Carta[] cartas) {
-        int i = 0;
-        while (cartas[i] != null) {
-            System.out.print("\t" + cartas[i]);
-            i++;
+
+    public static void turnoJugador() {
+            Carta c = SieteyMedia.baraja.darCartas(1)[0];
+            SieteyMedia.insertarCartaEnArray(SieteyMedia.cartasJugador, c);
+            InterfaceConsola.mostrarCartas(SieteyMedia.cartasJugador);
+            if (SieteyMedia.valorCartas(SieteyMedia.cartasJugador) < 7.5) {
+                auxiliar="menosiete";
+            }
+    }
+    public static void turnoBanca() {
+        double valorCartasJugador = SieteyMedia.valorCartas(SieteyMedia.cartasJugador);
+        if (valorCartasJugador > 7.5) {
+            auxiliar="pierjug";
+            return;
+        }
+        while (SieteyMedia.valorCartas(SieteyMedia.cartasBanca) < valorCartasJugador) {
+            Carta c = SieteyMedia.baraja.darCartas(1)[0];
+            SieteyMedia.insertarCartaEnArray(SieteyMedia.cartasBanca, c);
+        }
+        InterfaceConsola.mostrarCartas(SieteyMedia.cartasBanca);
+        if (SieteyMedia.valorCartas(SieteyMedia.cartasBanca) > 7.5) {
+            auxiliar2="massiete";
         }
     }
 }

@@ -1,8 +1,11 @@
 package sieteymedia;
 
-import recursos.*;
+import recursos.Carta;
 
+import java.util.Objects;
 import java.util.Scanner;
+
+import static sieteymedia.SieteyMedia.*;
 
 public class InterfaceConsola {
 
@@ -21,51 +24,46 @@ public class InterfaceConsola {
     System.out.println("- En este proceso puede ocurrir que la banca 'se pase' y entonces pierde la banca y gana el jugador.");
     System.out.println("\nEmpecemos!!!\n");
 }
-    static void turnoJugador() {
+    public static void mostrarCartas(Carta[] cartas) {
+        int i = 0;
+        while (cartas[i] != null) {
+            System.out.print("\t" + cartas[i]);
+            i++;
+        }
+    }
+    public static void GameControler(){
         Scanner sc = new Scanner(System.in);
+        //-------------------------------------------------------------
+        presentarJuego();
         char opc = 'C';
-        System.out.println("Como mínimo recibes una carta, luego puedes decidir si seguir o plantarte");
         while (SieteyMedia.valorCartas(SieteyMedia.cartasJugador) < 7.5 && opc == 'C') {
-            Carta c = SieteyMedia.baraja.darCartas(1)[0];
-            SieteyMedia.insertarCartaEnArray(SieteyMedia.cartasJugador, c);
+            System.out.println("Como mínimo recibes una carta, luego puedes decidir si seguir o plantarte");
+            turnoJugador();
             System.out.println("Éstas son tus cartas jugador:");
-            SieteyMedia.mostrarCartas(SieteyMedia.cartasJugador);
-            double valor = SieteyMedia.valorCartas(SieteyMedia.cartasJugador);
-            System.out.println("\n\tValor de cartas: " + valor);
-            if (valor < 7.5) {
+            System.out.println("\n\tValor de cartas: " + SieteyMedia.valorCartas(SieteyMedia.cartasJugador));
+            if (Objects.equals(auxiliar, "menosiete")) {
                 System.out.println("\n¿Pides [C]arta o te [P]lantas?");
                 opc = sc.next().trim().toUpperCase().charAt(0);
             }
         }
-    }
-    static void turnoBanca() {
-        double valorCartasJugador = SieteyMedia.valorCartas(SieteyMedia.cartasJugador);
-        if (valorCartasJugador > 7.5) {
-            System.out.println("Jugador, te has pasado en tu jugada anterior, gana la banca");
-            return;
-        }
-        System.out.println("\n\nTurno de banca ...");
-        while (SieteyMedia.valorCartas(SieteyMedia.cartasBanca) < valorCartasJugador) {
-            Carta c = SieteyMedia.baraja.darCartas(1)[0];
-            SieteyMedia.insertarCartaEnArray(SieteyMedia.cartasBanca, c);
-        }
-        System.out.println("Éstas son mis cartas:");
-        SieteyMedia.mostrarCartas(SieteyMedia.cartasBanca);
-        System.out.println("\nValor de mis cartas(banca): " + SieteyMedia.valorCartas(SieteyMedia.cartasBanca));
-        if (SieteyMedia.valorCartas(SieteyMedia.cartasBanca) > 7.5) {
-            System.out.println("me pasé, ganas tú,jugador");
-        } else {
-            System.out.println("Gana la banca");
-        }
-    }
-    public static void GameControler(){
-        new SieteyMedia();
-        presentarJuego();
-        turnoJugador();
+        //-----------------------------------------------------------------
         turnoBanca();
-        System.out.println("Adios");
+        if (Objects.equals(auxiliar, "pierjug")){
+            System.out.println("Jugador, te has pasado en tu jugada anterior, gana la banca");
+        }else {
+            System.out.println("\n\nTurno de banca ...");
+            System.out.println("Éstas son mis cartas:");
+            System.out.println("\nValor de mis cartas(banca): " + SieteyMedia.valorCartas(SieteyMedia.cartasBanca));
+            if (Objects.equals(auxiliar2, "massiete")){
+                System.out.println("me pasé, ganas tú,jugador");
+            }else {
+                System.out.println("Gana la banca");
+            }
+        }
     }
     public static void main(String[] args) {
+        new SieteyMedia();
         GameControler();
+        System.out.println("Adios");
     }
 }

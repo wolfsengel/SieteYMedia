@@ -3,7 +3,6 @@ package sieteymedia;
 import recursos.Baraja;
 import recursos.Carta;
 
-import java.util.Scanner;
 
 public class SieteyMedia {
     static String auxiliar="menosiete";

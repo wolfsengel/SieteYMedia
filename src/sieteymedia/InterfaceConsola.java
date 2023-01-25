@@ -36,8 +36,9 @@ public class InterfaceConsola {
         //-------------------------------------------------------------
         presentarJuego();
         char opc = 'C';
-        while (SieteyMedia.valorCartas(SieteyMedia.cartasJugador) < 7.5 && opc == 'C') {
-            System.out.println("Como mínimo recibes una carta, luego puedes decidir si seguir o plantarte");
+        System.out.println("Como mínimo recibes una carta, luego puedes decidir si seguir o plantarte");
+        while (Objects.equals(auxiliar, "menosiete") && opc == 'C') {
+
             System.out.println("Éstas son tus cartas jugador:");
             turnoJugador();
             System.out.println("\n\tValor de cartas: " + SieteyMedia.valorCartas(SieteyMedia.cartasJugador));
@@ -61,6 +62,7 @@ public class InterfaceConsola {
                 System.out.println("Gana la banca");
             }
         }
+        //------------------------------------------------------------------
     }
     public static void main(String[] args) {
         new SieteyMedia();

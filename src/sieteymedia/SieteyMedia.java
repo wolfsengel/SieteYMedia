@@ -6,7 +6,7 @@ import recursos.Carta;
 import java.util.Scanner;
 
 public class SieteyMedia {
-    static String auxiliar;
+    static String auxiliar="menosiete";
     static String auxiliar2;
     static Baraja baraja;
     static Carta[] cartasJugador;
@@ -37,25 +37,30 @@ public class SieteyMedia {
     }
 
     public static void turnoJugador() {
-            Carta c = SieteyMedia.baraja.darCartas(1)[0];
-            SieteyMedia.insertarCartaEnArray(SieteyMedia.cartasJugador, c);
-            InterfaceConsola.mostrarCartas(SieteyMedia.cartasJugador);
-            if (SieteyMedia.valorCartas(SieteyMedia.cartasJugador) < 7.5) {
+        Carta[] cartasxogador=SieteyMedia.cartasJugador;
+        Carta c = SieteyMedia.baraja.darCartas(1)[0];
+
+            SieteyMedia.insertarCartaEnArray(cartasxogador, c);
+            InterfaceConsola.mostrarCartas(cartasxogador);
+            if (SieteyMedia.valorCartas(cartasxogador) < 7.5) {
                 auxiliar="menosiete";
+            }else{
+                auxiliar="pierjug";
             }
     }
     public static void turnoBanca() {
-        double valorCartasJugador = SieteyMedia.valorCartas(SieteyMedia.cartasJugador);
-        if (valorCartasJugador > 7.5) {
+        Carta[] cartasxogador=SieteyMedia.cartasJugador;
+        Carta[] cartasbanca=SieteyMedia.cartasBanca;
+        if (SieteyMedia.valorCartas(cartasxogador) > 7.5) {
             auxiliar="pierjug";
             return;
         }
-        while (SieteyMedia.valorCartas(SieteyMedia.cartasBanca) < valorCartasJugador) {
+        while (SieteyMedia.valorCartas(cartasbanca) < SieteyMedia.valorCartas(cartasxogador)) {
             Carta c = SieteyMedia.baraja.darCartas(1)[0];
-            SieteyMedia.insertarCartaEnArray(SieteyMedia.cartasBanca, c);
+            SieteyMedia.insertarCartaEnArray(cartasbanca, c);
         }
-        InterfaceConsola.mostrarCartas(SieteyMedia.cartasBanca);
-        if (SieteyMedia.valorCartas(SieteyMedia.cartasBanca) > 7.5) {
+        InterfaceConsola.mostrarCartas(cartasbanca);
+        if (SieteyMedia.valorCartas(cartasbanca) > 7.5) {
             auxiliar2="massiete";
         }
     }

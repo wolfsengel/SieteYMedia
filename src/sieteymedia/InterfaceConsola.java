@@ -38,8 +38,8 @@ public class InterfaceConsola {
         char opc = 'C';
         while (SieteyMedia.valorCartas(SieteyMedia.cartasJugador) < 7.5 && opc == 'C') {
             System.out.println("Como mínimo recibes una carta, luego puedes decidir si seguir o plantarte");
-            turnoJugador();
             System.out.println("Éstas son tus cartas jugador:");
+            turnoJugador();
             System.out.println("\n\tValor de cartas: " + SieteyMedia.valorCartas(SieteyMedia.cartasJugador));
             if (Objects.equals(auxiliar, "menosiete")) {
                 System.out.println("\n¿Pides [C]arta o te [P]lantas?");
@@ -47,12 +47,13 @@ public class InterfaceConsola {
             }
         }
         //-----------------------------------------------------------------
-        turnoBanca();
+
         if (Objects.equals(auxiliar, "pierjug")){
             System.out.println("Jugador, te has pasado en tu jugada anterior, gana la banca");
         }else {
             System.out.println("\n\nTurno de banca ...");
             System.out.println("Éstas son mis cartas:");
+            turnoBanca();
             System.out.println("\nValor de mis cartas(banca): " + SieteyMedia.valorCartas(SieteyMedia.cartasBanca));
             if (Objects.equals(auxiliar2, "massiete")){
                 System.out.println("me pasé, ganas tú,jugador");

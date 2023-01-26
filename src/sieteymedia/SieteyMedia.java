@@ -5,18 +5,20 @@ import recursos.Carta;
 
 
 public class SieteyMedia {
-    static String auxiliar="menosiete";
-    static String auxiliar2;
-    static Baraja baraja;
-    static Carta[] cartasJugador;
-    static Carta[] cartasBanca;
+    String auxiliar;
+    String auxiliar2;
+    Baraja baraja;
+    Carta[] cartasJugador;
+    Carta[] cartasBanca;
     public SieteyMedia() {
+        auxiliar="menosiete";
+        auxiliar2="";
         baraja = new Baraja();
         baraja.barajar();
         cartasJugador = new Carta[15];
         cartasBanca = new Carta[15];
     }
-    public static double valorCartas(Carta[] cartas) {
+    public double valorCartas(Carta[] cartas) {
         double total = 0.0;
         int val;
         int i = 0;
@@ -27,7 +29,7 @@ public class SieteyMedia {
         }
         return total;
     }
-    public static void insertarCartaEnArray(Carta[] cartas, Carta c) {
+    public void insertarCartaEnArray(Carta[] cartas, Carta c) {
         int i = 0;
         while (cartas[i] != null) {
             i++;
@@ -35,31 +37,28 @@ public class SieteyMedia {
         cartas[i] = c;
     }
 
-    public static void turnoJugador() {
-        Carta[] cartasxogador=SieteyMedia.cartasJugador;
-        Carta c = SieteyMedia.baraja.darCartas(1)[0];
-
-            SieteyMedia.insertarCartaEnArray(cartasxogador, c);
-            InterfaceConsola.mostrarCartas(cartasxogador);
-            if (SieteyMedia.valorCartas(cartasxogador) < 7.5) {
+    public void turnoJugador() {
+        Carta[] cartasxogador=cartasJugador;
+        Carta c = baraja.darCartas(1)[0];
+            insertarCartaEnArray(cartasxogador, c);
+            if (valorCartas(cartasxogador) < 7.5) {
                 auxiliar="menosiete";
             }else{
                 auxiliar="pierjug";
             }
     }
-    public static void turnoBanca() {
-        Carta[] cartasxogador=SieteyMedia.cartasJugador;
-        Carta[] cartasbanca=SieteyMedia.cartasBanca;
-        if (SieteyMedia.valorCartas(cartasxogador) > 7.5) {
+    public void turnoBanca() {
+        Carta[] cartasxogador=cartasJugador;
+        Carta[] cartasbanca=cartasBanca;
+        if (valorCartas(cartasxogador) > 7.5) {
             auxiliar="pierjug";
             return;
         }
-        while (SieteyMedia.valorCartas(cartasbanca) < SieteyMedia.valorCartas(cartasxogador)) {
-            Carta c = SieteyMedia.baraja.darCartas(1)[0];
-            SieteyMedia.insertarCartaEnArray(cartasbanca, c);
+        while (valorCartas(cartasbanca) < valorCartas(cartasxogador)) {
+            Carta c = baraja.darCartas(1)[0];
+            insertarCartaEnArray(cartasbanca, c);
         }
-        InterfaceConsola.mostrarCartas(cartasbanca);
-        if (SieteyMedia.valorCartas(cartasbanca) > 7.5) {
+        if (valorCartas(cartasbanca) > 7.5) {
             auxiliar2="massiete";
         }
     }

@@ -5,11 +5,13 @@ import recursos.Carta;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static sieteymedia.SieteyMedia.*;
 
 public class InterfaceConsola {
-
-    static void presentarJuego() {
+public InterfaceConsola(){
+    presentarJuego();
+    GameControler();
+}
+      void presentarJuego() {
     System.out.println("- El usuario es el jugador y el ordenador la banca.");
     System.out.println("- No hay en la baraja 8s y 9s. El 10 es la sota, el 11 el caballo y el 12 el Rey.");
     System.out.println("- las figuras (10-sota, 11-caballo y 12-rey) valen medio punto y, el resto, su valor.");
@@ -24,39 +26,41 @@ public class InterfaceConsola {
     System.out.println("- En este proceso puede ocurrir que la banca 'se pase' y entonces pierde la banca y gana el jugador.");
     System.out.println("\nEmpecemos!!!\n");
 }
-    public static void mostrarCartas(Carta[] cartas) {
+    public void mostrarCartas(Carta[] cartas) {
         int i = 0;
         while (cartas[i] != null) {
             System.out.print("\t" + cartas[i]);
             i++;
         }
     }
-    public static void GameControler(){
+    public void GameControler(){
+        SieteyMedia xogo = new SieteyMedia();
         Scanner sc = new Scanner(System.in);
         //-------------------------------------------------------------
-        presentarJuego();
         char opc = 'C';
         System.out.println("Como mínimo recibes una carta, luego puedes decidir si seguir o plantarte");
-        while (Objects.equals(auxiliar, "menosiete") && opc == 'C') {
+        while (Objects.equals(xogo.auxiliar, "menosiete") && opc == 'C') {
 
             System.out.println("Éstas son tus cartas jugador:");
-            turnoJugador();
-            System.out.println("\n\tValor de cartas: " + SieteyMedia.valorCartas(SieteyMedia.cartasJugador));
-            if (Objects.equals(auxiliar, "menosiete")) {
+            xogo.turnoJugador();
+            mostrarCartas(xogo.cartasJugador);
+            System.out.println("\n\tValor de cartas: " + xogo.valorCartas(xogo.cartasJugador));
+            if (Objects.equals(xogo.auxiliar, "menosiete")) {
                 System.out.println("\n¿Pides [C]arta o te [P]lantas?");
                 opc = sc.next().trim().toUpperCase().charAt(0);
             }
         }
         //-----------------------------------------------------------------
 
-        if (Objects.equals(auxiliar, "pierjug")){
+        if (Objects.equals(xogo.auxiliar, "pierjug")){
             System.out.println("Jugador, te has pasado en tu jugada anterior, gana la banca");
         }else {
             System.out.println("\n\nTurno de banca ...");
             System.out.println("Éstas son mis cartas:");
-            turnoBanca();
-            System.out.println("\nValor de mis cartas(banca): " + SieteyMedia.valorCartas(SieteyMedia.cartasBanca));
-            if (Objects.equals(auxiliar2, "massiete")){
+            mostrarCartas(xogo.cartasBanca);
+            xogo.turnoBanca();
+            System.out.println("\nValor de mis cartas(banca): " + xogo.valorCartas(xogo.cartasBanca));
+            if (Objects.equals(xogo.auxiliar2, "massiete")){
                 System.out.println("me pasé, ganas tú,jugador");
             }else {
                 System.out.println("Gana la banca");
@@ -65,8 +69,7 @@ public class InterfaceConsola {
         //------------------------------------------------------------------
     }
     public static void main(String[] args) {
-        new SieteyMedia();
-        GameControler();
+        new InterfaceConsola();
         System.out.println("Adios");
     }
 }

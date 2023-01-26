@@ -38,27 +38,25 @@ public class SieteyMedia {
     }
 
     public void turnoJugador() {
-        Carta[] cartasxogador=cartasJugador;
         Carta c = baraja.darCartas(1)[0];
-            insertarCartaEnArray(cartasxogador, c);
-            if (valorCartas(cartasxogador) < 7.5) {
+            insertarCartaEnArray(cartasJugador, c);
+            if (valorCartas(cartasJugador) < 7.5) {
                 auxiliar="menosiete";
             }else{
                 auxiliar="pierjug";
             }
     }
     public void turnoBanca() {
-        Carta[] cartasxogador=cartasJugador;
-        Carta[] cartasbanca=cartasBanca;
-        if (valorCartas(cartasxogador) > 7.5) {
+
+        if (valorCartas(cartasJugador) > 7.5) {
             auxiliar="pierjug";
             return;
         }
-        while (valorCartas(cartasbanca) < valorCartas(cartasxogador)) {
+        while (valorCartas(cartasBanca) < valorCartas(cartasJugador)) {
             Carta c = baraja.darCartas(1)[0];
-            insertarCartaEnArray(cartasbanca, c);
+            insertarCartaEnArray(cartasBanca, c);
         }
-        if (valorCartas(cartasbanca) > 7.5) {
+        if (valorCartas(cartasBanca) > 7.5) {
             auxiliar2="massiete";
         }
     }

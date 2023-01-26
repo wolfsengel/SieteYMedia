@@ -61,7 +61,7 @@ public InterfaceConsola(){
             xogo.turnoBanca();
             System.out.println("\nValor de mis cartas(banca): " + xogo.valorCartas(xogo.cartasBanca));
             if (Objects.equals(xogo.auxiliar2, "massiete")){
-                System.out.println("me pasé, ganas tú,jugador");
+                System.out.println("Me pasé, ganas tú,jugador");
             }else {
                 System.out.println("Gana la banca");
             }

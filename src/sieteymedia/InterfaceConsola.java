@@ -1,8 +1,6 @@
 package sieteymedia;
 
 import recursos.Carta;
-
-import java.util.Objects;
 import java.util.Scanner;
 
 

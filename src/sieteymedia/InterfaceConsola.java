@@ -39,28 +39,28 @@ public InterfaceConsola(){
         //-------------------------------------------------------------
         char opc = 'C';
         System.out.println("Como mínimo recibes una carta, luego puedes decidir si seguir o plantarte");
-        while (Objects.equals(xogo.auxiliar, "menosiete") && opc == 'C') {
 
+        while (xogo.valorCartas(xogo.cartasJugador) < 7.5 && opc == 'C') {
             System.out.println("Éstas son tus cartas jugador:");
             xogo.turnoJugador();
             mostrarCartas(xogo.cartasJugador);
             System.out.println("\n\tValor de cartas: " + xogo.valorCartas(xogo.cartasJugador));
-            if (Objects.equals(xogo.auxiliar, "menosiete")) {
+            if (xogo.valorCartas(xogo.cartasJugador) < 7.5) {
                 System.out.println("\n¿Pides [C]arta o te [P]lantas?");
                 opc = sc.next().trim().toUpperCase().charAt(0);
             }
         }
         //-----------------------------------------------------------------
 
-        if (Objects.equals(xogo.auxiliar, "pierjug")){
+        if (xogo.valorCartas(xogo.cartasJugador) > 7.5){
             System.out.println("Jugador, te has pasado en tu jugada anterior, gana la banca");
-        }else {
+        }else{
             System.out.println("\n\nTurno de banca ...");
             System.out.println("Éstas son mis cartas:");
             xogo.turnoBanca();
             mostrarCartas(xogo.cartasBanca);
             System.out.println("\nValor de mis cartas(banca): " + xogo.valorCartas(xogo.cartasBanca));
-            if (Objects.equals(xogo.auxiliar2, "massiete")){
+            if (xogo.valorCartas(xogo.cartasBanca) > 7.5){
                 System.out.println("Me pasé, ganas tú,jugador");
             }else {
                 System.out.println("Gana la banca");

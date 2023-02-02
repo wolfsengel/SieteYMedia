@@ -41,6 +41,7 @@ class InterfaceConsola{
 
             System.out.println("Ã‰stas son tus cartas jugador:");
             mostrarCartas(juego.cartasJugador);
+            System.out.println("\n\tValor de cartas: " + juego.valorCartas(juego.cartasJugador));
             if (juego.valorCartas(juego.cartasJugador) < 7.5) {
                 System.out.println("\nÂ¿Pides [C]arta o te [P]lantas?");
                 opc = sc.next().trim().toUpperCase().charAt(0);
